@@ -1,0 +1,179 @@
+Watch mongoose relational video
+
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+
+> use student
+switched to db student
+
+
+> show collection
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1211:11
+shellHelper@src/mongo/shell/utils.js:838:15
+@(shellhelp2):1:1
+
+
+> show collections
+
+
+> db.student.insert({name:"Jeel",age:20,smartworking:true})
+WriteResult({ "nInserted" : 1 })
+
+
+> show collections
+student
+
+
+> db.student.insert({name:"anjali",age:23,smartworking:true},{name:"jadu",age:21,smartworking:false})
+WriteResult({ "nInserted" : 1 })
+
+
+> db.student.find()
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 20, "smartworking" : true }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true }
+
+
+> db.student.insert([{name:"hello",age:23,smartworking:true},{name:"jadu",age:21,smartworking:false}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+
+
+> db.student.find()
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 20, "smartworking" : true }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c4"), "name" : "hello", "age" : 23, "smartworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c5"), "name" : "jadu", "age" : 21, "smartworking" : false }
+
+
+> show dbs
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+student  0.000GB
+
+
+> db.student.findOne({name:"Jeel"})
+{
+        "_id" : ObjectId("627a0838b3683dffb2b496c2"),
+        "name" : "Jeel",
+        "age" : 20,
+        "smartworking" : true
+}
+
+
+> db.student.find({smartworking:true})
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 20, "smartworking" : true }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c4"), "name" : "hello", "age" : 23, "smartworking" : true }
+
+
+> db.student.updateOne({name:"Jeel"},{$set:{age:21}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 21, "smartworking" : true }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c4"), "name" : "hello", "age" : 23, "smartworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c5"), "name" : "jadu", "age" : 21, "smartworking" : false }
+
+
+> db.student.updateMany({smartworking:true},{$set:{hardworking:true}})
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+> db.student.find()
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 21, "smartworking" : true, "hardworking" : true }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true, "hardworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c4"), "name" : "hello", "age" : 23, "smartworking" : true, "hardworking" : true }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c5"), "name" : "jadu", "age" : 21, "smartworking" : false }
+
+
+db.movies.updateMany({ tital: "bye" }, { $set: {score: 7 ,rating: "royal"} })
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+
+
+
+> db.student.updateMany({},{$set:{college:"vgec"},$currentDate:{lastchanged:true}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.student.find()
+{ "_id" : ObjectId("627a0838b3683dffb2b496c2"), "name" : "Jeel", "age" : 21, "smartworking" : true, "hardworking" : true, "college" : "vgec", "lastchanged" : ISODate("2022-05-10T07:27:26.287Z") }
+{ "_id" : ObjectId("627a0895b3683dffb2b496c3"), "name" : "anjali", "age" : 23, "smartworking" : true, "hardworking" : true, "college" : "vgec", "lastchanged" : ISODate("2022-05-10T07:27:26.287Z") }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c4"), "name" : "hello", "age" : 23, "smartworking" : true, "hardworking" : true, "college" : "vgec", "lastchanged" : ISODate("2022-05-10T07:27:26.287Z") }
+{ "_id" : ObjectId("627a08bbb3683dffb2b496c5"), "name" : "jadu", "age" : 21, "smartworking" : false, "college" : "vgec", "lastchanged" : ISODate("2022-05-10T07:27:26.287Z") }
+
+
+> db.student.deleteOne({smartworking:false})
+{ acknowledged: true, deletedCount: 1 }
+> db.student.find({})
+{ _id: ObjectId("627a0838b3683dffb2b496c2"),
+  name: 'Jeel',
+  age: 21,
+  smartworking: true,
+  hardworking: true,
+  college: 'vgec',
+  lastchanged: 2022-05-10T07:27:26.287Z }
+{ _id: ObjectId("627a0895b3683dffb2b496c3"),
+  name: 'anjali',
+  age: 23,
+  smartworking: true,
+  hardworking: true,
+  college: 'vgec',
+  lastchanged: 2022-05-10T07:27:26.287Z }
+{ _id: ObjectId("627a08bbb3683dffb2b496c4"),
+  name: 'hello',
+  age: 23,
+  smartworking: true,
+  hardworking: true,
+  college: 'vgec',
+  lastchanged: 2022-05-10T07:27:26.287Z }
+
+
+> db.student.deleteMany({})
+{ acknowledged: true, deletedCount: 3 }
+> db.student.find()
+
+
+> db.student.find({"course.js":true})
+{ "_id" : ObjectId("627a6f3739652593350736aa"), "name" : "jeel", "age" : 20, "smartworking" : true, "course" : { "java" : true, "python" : true, "js" : true } }
+{ "_id" : ObjectId("627a708639652593350736ab"), "name" : "anjali", "age" : 23, "smartworking" : true, "course" : { "java" : false, "python" : true, "js" : true } }
+{ "_id" : ObjectId("627a708639652593350736ac"), "name" : "ram", "age" : 30, "smartworking" : false, "course" : { "java" : true, "python" : true, "js" : true } }
+
+
+> db.student.find({age:{$in:[20,23]}})
+{ "_id" : ObjectId("627a6f3739652593350736aa"), "name" : "jeel", "age" : 20, "smartworking" : true, "course" : { "java" : true, "python" : true, "js" : true } }
+{ "_id" : ObjectId("627a708639652593350736ab"), "name" : "anjali", "age" : 23, "smartworking" : true, "course" : { "java" : false, "python" : true, "js" : true } }
+
+
+> db.student.find({$or:[{age:20},{"course.js":false}]})
+{ "_id" : ObjectId("627a6f3739652593350736aa"), "name" : "jeel", "age" : 20, "smartworking" : true, "course" : { "java" : true, "python" : true, "js" : true } }
+{ "_id" : ObjectId("627a708639652593350736ad"), "name" : "jadu", "age" : 25, "smartworking" : true, "course" : { "java" : true, "python" : false, "js" : false } }
+
+
+> db.student.find({age:{$lte:22}})
+{ _id: ObjectId("627a0838b3683dffb2b496c2"),
+  name: 'Jeel',
+  age: 21,
+  smartworking: true,
+  hardworking: true,
+  college: 'vgec',
+  lastchanged: 2022-05-10T07:27:26.287Z }
+{ _id: ObjectId("627a08bbb3683dffb2b496c5"),
+  name: 'Jadu',
+  age: 21,
+  smartworking: false,
+  college: 'vgec',
+  lastchanged: 2022-05-10T07:27:26.287Z }

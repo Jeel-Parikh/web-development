@@ -1,0 +1,6 @@
+Before installing any npm modual first time if you are installing new modual in directory then run "npm init" this will make package.json file which have all dependences
+This is help ful when we share our project with oter person we share only package.json file with other html,css and js file and then other user will run only 
+"npm install" then system automatically download all dependencies writen in package.json file
+
+use "npm install <package-name>" or "npm i <package-name>" to install npm modual locally is will make node_moduals directory and put all moduals in that folder
+use "npm install -g <package-name>" to install modual globally in my case it will sore at " C:\Users\anjali\AppData\Roaming\npm\node_modules\"

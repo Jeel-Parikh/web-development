@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./head") %>
+    <title>Update</title>
+</head>
+
+<body>
+    <%- include("./navbar") %> 
+    <form action="/update/<%= p._id %>/?_method=PUT" method="POST">
+        <label for="firstname">Firstname: </label>
+        <input type="text" name="firstname" required id="firstname" value=<%= p.firstname %>><br>
+        <label for="lastname">Lastname: </label>
+        <input type="text" name="lastname" required id="lastname" value=<%= p.lastname %>><br>
+        <label for="email">Email: </label>
+        <input type="email" name="email" required id="email" value=<%= p.email %>><br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" required id="password" value=<%= p.password %>><br>
+        <label for="gender">Gender: </label>
+        <select name="gender" required id="gender">
+            <% for (let i of gender) {%>
+            <option value="<%= i %>" <%= p.gender==i ? "selected": "" %>> <%= i %> </option>
+            <% } %>
+        </select>
+        <br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+
+</html>

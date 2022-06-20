@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Units</title>
+    <style>
+        .container {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 2em;
+            /* 1em mean same as parent. 2em mean double of parent */
+            width: 3em;
+            /*because parent have not width it will refere the font-size and according to if will change the width*/
+        }
+
+        button {
+            background-color: blanchedalmond;
+            font-size: 2em;
+            padding: 1em;
+            border-radius: 0.5em;
+            /*By using this type of property we can make similer look of button in different size*/
+        }
+
+        .ems {
+            font-size: 1.5em;
+            /*In this type of thing em will not work*/
+        }
+
+        .rems {
+            font-size: 1.5rem;
+            /*This will take rafer of root which was same in all condition in nested thind this will better to use*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>example of em unit</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur modi amet doloremque possimus,
+            exercitationem veniam quos cum unde mollitia molestiae consequatur sed, voluptates quas. Fugit autem optio
+            architecto ab quae.
+            Beatae repudiandae necessitatibus officiis quibusdam quam. Accusamus a recusandae dolorem veniam nulla vel,
+            voluptatem possimus voluptatum, beatae fuga doloribus deserunt! Nemo nesciunt sunt perferendis cum quod
+            libero unde excepturi
+        </p>
+        <button>click me</button>
+        <ul class="ems">
+            <li> pasta
+                <ul class="ems">
+                    <li>hello
+                        <ul class="ems">
+                            <li>world</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>dosa</li>
+            <li>Pizza</li>
+        </ul>
+        <ul class="rems">
+            <li> pasta
+                <ul class="rems">
+                    <li>hello
+                        <ul class="rems">
+                            <li>world</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>dosa</li>
+            <li>Pizza</li>
+        </ul>
+    </div>
+    <br><br>
+    <button>click me</button>
+</body>
+
+</html>

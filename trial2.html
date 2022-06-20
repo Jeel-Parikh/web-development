@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var array = [3,
+			400,
+			function (a, b) { return a * b },
+			"Vivek",
+			"Ameer",
+			function (a, b) { return a + b },
+			true, false, "Dev",
+			{ name: "Vivek" }];
+
+		addArray = function () {
+			var val1 = document.getElementById('box1').value;
+			document.getElementById('box1').value = "";
+			array.push(val1);
+			console.log(array.length);
+		}
+		showArray = function () {
+			//JSON.stringify(s);
+			console.log(array.length);
+			console.log(JSON.stringify(array));
+			document.getElementById('result').innerHTML = JSON.stringify(array);
+		}
+		showDetails = function () {
+			var numberCount = 0;
+			var stringCount = 0;
+			var functionCount = 0;
+			var objectCount = 0;
+			var boolCount = 0;
+			for (var i = 0; i < array.length; i++) {
+				console.log(array[i] + " is a " + typeof (array[i]));
+				if (typeof (array[i]) == 'number') {
+					numberCount++;
+				} else if (typeof (array[i]) == 'string') {
+					stringCount++;
+				} else if (typeof (array[i]) == 'object') {
+					objectCount++;
+				} else if (typeof (array[i]) == 'function') {
+					functionCount++;
+				} else if (typeof (array[i]) == 'boolean') {
+					boolCount++;
+				}
+				// increment numberCount
+			}
+
+			var details = `array has ` + stringCount + ` strings,<br/>
+			array has `+ numberCount + ` numbers,<br/>
+			array has `+ functionCount + ` functions,<br/>
+			array has `+ objectCount + ` objects,<br/>
+			array has `+ boolCount + ` boolean,<br/>`;
+
+			document.getElementById('details').innerHTML = details;
+		}
+
+	</script>
+	<form>
+		Add Value: <input id="box1" name="" value="33"><br /><br />
+		<label id="result"></label> <br /><br />
+		<label id="details">
+		</label> <br /><br />
+		<input type="button" name="" value="alert" onclick="sayHello();"> |
+		<input type="button" name="" value="Add Value" onclick="addArray();"> |
+		<input type="button" name="" value="Show All Values" onclick="showArray();"> |
+		<input type="button" name="" value="Show details" onclick="showDetails();">
+	</form>
+</body>
+
+</html>

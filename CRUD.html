@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+
+<body>
+    <div id="clock" style="background-color:lightblue"></div>
+    <form action="">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name"> <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email"> <br>
+        <label for="number">Phone No:</label>
+        <input type="text" id="number" placeholder="Enter your number"> <br>
+    </form>
+    <input type="button" value="Add" id="add">
+    <input type="button" value="Sort" id="sort" onclick="sortValue();">
+    <input type="button" value="Show" id="show" onclick="showValue(customer);"> <br><br>
+    <label for="search">Search:</label>
+    <select id="select" value="column">
+        <option value="name">Name</option>
+        <option value="email">Email</option>
+        <option value="number">Phone No</option>
+    </select>
+    <input type="text" id="search">
+    <input type="button" value="Search" onclick="searchValue();">
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NO</th>
+                <th>DELETE</th>
+                <th>EDIT</th>
+            </tr>
+        </thead>
+        <tbody id="result">
+
+        </tbody>
+    </table>
+    <script>
+        // Date=new Date();
+        // document.getElementById("clock").innerHTML=`Date : `+Date.getDate()+`Month : `+(parseInt(Date.getMonth())+1)+`Year : `+Date.getFullYear();
+        var customer = [
+            { id: "1", name: 'jeel', email: "dddhk@gmail.com", number: "8387387" },
+            { id: "2", name: 'anjali', email: "anjalik@gmail.com", number: "9839389" },
+            { id: "3", name: 'papa', email: "papa@gmail.com", number: "912998" }
+        ];
+        saveToStorage = function () {
+            localStorage.setItem("customer", JSON.stringify(customer));
+        }
+        function getFromStorage() {
+            var data = localStorage.getItem("customer");
+            if (data != null) {
+                customer = JSON.parse(localStorage.getItem("customer"));
+            }
+        }
+        selectedId = function (id) {
+            selectedId = id;
+            let people = getCustomerDetail(id);
+            document.getElementById("name").value = people.name;
+            document.getElementById("email").value = people.email;
+            document.getElementById("number").value = people.number;
+            document.getElementById("add").value = "update";
+            return (id);
+        }
+        getCustomerDetail = function (id) {
+            for (i = 0; i < customer.length; i++) {
+                if (id == customer[i].id) {
+                    return (customer[i]);
+                }
+            }
+        }
+        var add = document.getElementById("add");
+        add.onclick = () => {
+            let people = {};
+            people.id = Date.now();
+            people.name = document.getElementById("name").value;
+            people.email = document.getElementById("email").value;
+            people.number = document.getElementById("number").value;
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("number").value = "";
+            let t = document.getElementById("add").value;
+            if (t == "update") {
+                id = selectedId;
+                let oldCustomer = getCustomerDetail(id);
+                oldCustomer.name = people.name;
+                oldCustomer.email = people.email;
+                oldCustomer.number = people.number;
+                document.getElementById("add").value = "add";
+            }
+            else {
+                customer.push(people);
+            }
+            saveToStorage();
+            showValue(customer);
+        }
+        sortValue = () => {
+            customer.sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+            }
+            );
+            showValue(customer);
+        }
+        searchValue = () => {
+            let column = document.getElementById("select").value;
+            let search = document.getElementById("search").value.toLowerCase();
+            let searchCustomer = customer.filter((item) => {
+                if (item[column].toLowerCase().startsWith(search)) {
+                    return item;
+                }
+            });
+            showValue(searchCustomer);
+        }
+        deleteValue = function (id) {
+            let temp = [];
+            for (let i = 0; i < customer.length; i++) {
+                if (customer[i].id != id) {
+                    temp.push(customer[i]);
+                }
+            }
+            customer = temp;
+            saveToStorage();
+            showValue(customer);
+        }
+
+        function showValue(customer) {
+            let result = document.getElementById("result");
+            result.innerHTML = "";
+            for (let i = 0; i < customer.length; i++) {
+                const trow = document.createElement("tr");
+                const id = document.createElement("td");
+                id.innerHTML = customer[i].id;
+                const name = document.createElement("td");
+                name.innerHTML = customer[i].name;
+                const email = document.createElement("td");
+                email.innerHTML = customer[i].email;
+                const number = document.createElement("td");
+                number.innerHTML = customer[i].number;
+                const deletebox = document.createElement("td");
+                const deletebtn = document.createElement("button");
+                deletebtn.innerHTML = "Delete";
+                deletebtn.onclick = function (e) {
+                    e.preventDefault();
+                    deleteValue(customer[i].id);
+                }
+                const editbox = document.createElement("td");
+                const editbtn = document.createElement("button");
+                editbtn.innerHTML = "Edit";
+                editbtn.onclick = function (e) {
+                    e.preventDefault();
+                    selectedId(customer[i].id);
+                }
+                deletebox.appendChild(deletebtn);
+                editbox.appendChild(editbtn);
+                trow.appendChild(id);
+                trow.appendChild(name);
+                trow.appendChild(email);
+                trow.appendChild(number);
+                trow.appendChild(deletebox);
+                trow.appendChild(editbox);
+                result.appendChild(trow);
+            }
+        }
+        getFromStorage();
+    </script>
+</body>
+
+</html>

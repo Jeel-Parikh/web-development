@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script>
+        /*var array= [10,20,30];
+        console.log(array+"\n"+array.length);
+        array.push(40);
+        console.log(array[3]);
+        var a=array.indexOf(10);
+        console.log(a);*/
+        var array = [3, "jeel", true, {
+            "hello": 15
+        }];
+
+        function addValue() {
+            var a = document.getElementById("box1").value;
+            document.getElementById("box1").value = "";
+            array.push(a);
+            console.log(a);
+        }
+
+        function showValue() {
+            console.log(array.length);
+            console.log(JSON.stringify(array));
+            document.getElementById("result").value = JSON.stringify(array);
+        }
+
+        function detail() {
+            var number = 0;
+            var boolean = 0;
+            var string = 0;
+            var arr = 0;
+            var other = 0;
+
+            for (var i = 0; i < array.length; i++) {
+                console.log(array[i] + " is a type of " + typeof (array[i]));
+                if (typeof (array[i]) == 'number') {
+                    number++;
+                } else if (typeof (array[i]) == 'string') {
+                    string++;
+                } else if (typeof (array[i]) == 'array') {
+                    arr++;
+                } else {
+                    other++;
+                }
+            }
+            var detail = `In array there are ` + number + `number <br/>` +
+                string + ` string <br/>` +
+                boolean + ` boolean <br/>` +
+                arr + `array <br/>` +
+                other + `other <br/>`;
+            document.getElementById("detail").innerHTML = detail;
+
+        }
+    </script>
+    <form>
+        value = <input type="" id="box1" placeholder="Enter value"><br>
+        <label for="result"></label>
+        result =
+        <input type="textarea" id="result"><br>
+        <label id="detail"></label>
+        <input type="button" value="add" onclick="addValue();">
+        <input type="button" value="show" onclick="showValue();">
+        <input type="button" value="detail" onclick="detail();">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3</title>
+    <style>
+        .container {
+            border: 2px solid black;
+            display: flex;
+            flex-direction: row;/*by default*/
+            /*flex-direction: row-reverse;*/
+            /*flex-direction: column;*/
+
+            /*by default it is no wrap*/
+            flex-wrap: wrap;
+
+            /*This will align content in center in horizontal*/
+            justify-content:center;
+            /*This will align content in center in vertical*/
+            align-items: center;
+        }
+
+        .box {
+            border: 2px solid black;
+            background-color: grey;
+            margin:5px;
+            padding:5px;
+        }
+
+        #box1 {
+            order: 1;/*Higher order goes right decide siquence of element of flex*/
+            /*flex-grow: 1;/*Higher number mean grow in speed comparitively than other element when it have chance to grow*/
+            flex-basis: 150px; 
+            /* it will use for width if flex is row and height in column */
+            align-self: flex-end;
+        }
+
+        #box2 {
+            order:2;
+           /*flex-grow: 3;
+            flex-shrink: 2;/*Higher number mean shrink in speed comparitively than other element when it have chance to shrink*/
+        }
+
+        #box3 {
+            order:3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box" id="box1">Division 1</div>
+        <div class="box" id="box2">Division 2</div>
+        <div class="box" id="box3">Division 3</div>
+    </div>
+</body>
+
+</html>

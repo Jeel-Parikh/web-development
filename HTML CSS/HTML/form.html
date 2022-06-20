@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <title>form-1</title>
+  <link rel="stylesheet" type="text/css" href="form.css">
+  </style>
+</head>
+
+<body>
+  <div>
+    <marquee>
+      Welcome please fill the form
+    </marquee>
+  </div>
+  <form method="post">
+    <table>
+      <tbody>
+        <tr>
+          <td> firstname</td>
+          <td><input style="text-transform: uppercase;" type="text" name="firstname" placeholder="firstname" required>
+          </td>
+        </tr>
+        <tr>
+          <td> lastname</td>
+          <td> <input style="text-transform: uppercase;" type="text" name="lastname" placeholder="lastname" required>
+          </td>
+        </tr>
+        <tr>
+          <td>username </td>
+          <td> <input style="text-transform: uppercase;" type="text" name="username" placeholder="username" required>
+          </td>
+        </tr>
+        <tr>
+          <td>password </td>
+          <td><input type="password" name="password" placeholder="password" required>
+          </td>
+        </tr>
+        <tr>
+          <td> gender </td>
+          <td><input type="radio" name="r5" required>male <input type="radio" name="r5" required>female</td>
+        </tr>
+        <tr>
+          <td>address</td>
+          <td>
+            <name="address">
+              <textarea style="text-transform: uppercase; border-radius: 5px;" required
+                placeholder="house no, place,area, village,dist-pincode"></textarea>
+            </name="address">
+          </td>
+        </tr>
+        <tr>
+          <td> birth date</td>
+          <td><input type="date" name="date" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" formaction="form2.html">next</button>
+    <input type="reset" value="reset">
+    <div>
+      <marquee>
+        After fill form-1 please fill form-2
+      </marquee>
+    </div>
+  </form>
+</body>
+
+</html>

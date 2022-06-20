@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD2</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="name">Name: </label>
+        <input type="text" id="name"><br>
+        <label for="email">Email: </label>
+        <input type="email" id="email"><br>
+        <label for="number">Phone number: </label>
+        <input type="text" id="number"><br>
+        <input type="submit" id="submit" value="add">
+        <input type="button" id="show" value="show">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>phone number</th>
+                <th>edit</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <script>
+        peoples = [{
+            id: '1',
+            name: "jeel",
+            email: "hello@gmail.com",
+            number: "989839893"
+        }]
+        document.getElementById("submit").addEventListener("click", (e) => {
+            e.preventDefault();
+            addPeople();
+        })
+        document.getElementById("show").addEventListener("click", (e) => {
+            e.preventDefault();
+            showPeople(peoples)
+        })
+        var addPeople = function () {
+            var people = {}
+            people.id = Date.now()
+            people.name = document.getElementById("name").value
+            people.email = document.getElementById("email").value
+            people.number = document.getElementById("number").value
+            status = document.getElementById("submit").value
+            if (status == "add") {
+                peoples.push(people)
+                // showPeople(peoples)
+            } else {
+                for (i of peoples) {
+                    if (i.id == id) {
+                        i.name = people.name
+                        i.email = people.email
+                        i.number = people.number
+                        document.getElementById("submit").value = "add"
+                        break
+                    }
+                }
+            }
+            document.getElementById("name").value = ""
+            document.getElementById("email").value = ""
+            document.getElementById("number").value = ""
+            showPeople(peoples)
+        }
+        editPeople = function (p) {
+            document.getElementById("name").value = p.name
+            document.getElementById("email").value = p.email
+            document.getElementById("number").value = p.number
+            document.getElementById("submit").value = "update"
+            id = p.id
+        }
+        deletePeople = function (p) {
+            temp = []
+            for (i = 0; i < peoples.length; i++) {
+                if (peoples[i].id == p.id) {
+                    continue
+                } else {
+                    temp.push(peoples[i])
+                }
+            }
+            peoples = temp
+            showPeople(peoples)
+        }
+
+        var showPeople = function (p) {
+            var tbody = document.getElementById("tbody")
+            tbody.innerHTML = ""
+            console.log(p.length)
+            if (p.length == 0) {
+                peoples = []
+                tbody.innerHTML = "<h1>No data </h1>"
+                // tbody.append(h)
+                // table.innerHTML("no data")
+            } else {
+
+                for (let i of p) {
+                    let tr = document.createElement("tr")
+
+                    let id = document.createElement("td")
+                    let name = document.createElement("td")
+                    let email = document.createElement("td")
+                    let number = document.createElement("td")
+                    let edittd = document.createElement("td")
+                    let deletetd = document.createElement("td");
+                    let editbtn = document.createElement("button")
+                    let deletebtn = document.createElement("button");
+                    editbtn.onclick = (e) => {
+                        e.preventDefault();
+                        editPeople(i)
+                    }
+                    deletebtn.onclick = (e) => {
+                        e.preventDefault()
+                        deletePeople(i)
+                    }
+                    editbtn.innerHTML = "Edit"
+                    deletebtn.innerHTML = "Delete"
+                    edittd.append(editbtn)
+                    deletetd.append(deletebtn)
+                    id.innerHTML = i.id
+                    name.innerHTML = i.name
+                    email.innerHTML = i.email
+                    number.innerHTML = i.number
+                    tr.append(id)
+                    tr.append(name)
+                    tr.append(email)
+                    tr.append(number)
+                    tr.append(edittd)
+                    tr.append(deletetd)
+                    tbody.append(tr)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

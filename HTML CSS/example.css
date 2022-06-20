@@ -1,0 +1,48 @@
+.redbg {
+    background-color: red;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.white {
+    color: white;
+}
+
+/* h3
+{
+    color:green;
+} */
+#font {
+    font-style: italic;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /*if first font not found then seconf font*/
+    font-size: 30px;
+}
+
+#font2 {
+    font-family: 'Cedarville Cursive', cursive;
+    /*online font*/
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 10px;
+    /*Difference between two line*/
+}
+
+.division {
+    background-color: lightslategray;
+    background-image: url("icon.png");
+    color: black;
+    height: 500px;
+    width: 500px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* border:5px dotted green; */
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100px 0px 100px 0px;
+    /*sequence of redius top-left, top-right,bottom-right, bottom-left (top-left to clock wise direction*/
+}

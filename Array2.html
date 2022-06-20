@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script>
+        /*var array= [10,20,30];
+        console.log(array+"\n"+array.length);
+        array.push(40);
+        console.log(array[3]);
+        var a=array.indexOf(10);
+        console.log(a);*/
+        var array = [];
+
+        function addValue() {
+            var a = document.getElementById("box1").value;
+            document.getElementById("box1").value = "";
+            array.push(a);
+            console.log(a);
+            showValue();
+        }
+
+       /* 
+
+       deletevalue=function()
+        {
+            var temparray=[];
+            var val=document.getElementById("box1").value;
+            array.map(function(value)
+            {
+                if(value!=val)
+                {
+                    temparray.push(value);
+                }
+        })
+
+        */
+
+        deletevalue=function(val)
+        {
+            var temparray=[];
+            //var val=document.getElementById("box1").value;
+            array.map(function(value)
+            {
+                if(value!=val)
+                {
+                    temparray.push(value);
+                }
+        })
+            array=temparray;
+            console.log(val+" deleted successfully");
+            //document.getElementById("result").innerHTML=JSON.stringify(array);
+            showValue();
+        }
+
+        function showValue() {
+            // console.log(array.length);
+            // console.log(JSON.stringify(array));
+            // document.getElementById("result").innerHTML = JSON.stringify(array);
+            let result = document.getElementById("result");
+            document.getElementById("result").innerHTML ="";
+            array.sort();   //to sort array
+            for(let i=0;i<array.length;i++)
+            {
+                let word=array[i];
+                let text=document.createTextNode(word+" ");
+                const div=document.createElement("div");
+                const deletebtn=document.createElement("button");
+                deletebtn.innerHTML="delete";
+                deletebtn.onclick=function(e)
+                {
+                    e.preventDefault(); //to prevent default nature of button which was submit
+                    console.log("delete:"+word);
+                    deletevalue(word);
+                }
+                div.appendChild(text);  //if you put this div then every time your new answer will be in new line
+                div.appendChild(deletebtn);
+                result.appendChild(div);
+            }
+        }
+
+    </script>
+    
+    <form>
+        value = <input type="" id="box1" placeholder="Enter value"><br>
+        <div id="result"></div>
+                             <!--result=//<label id="result"></label><br>-->
+        <input type="button" value="add" onclick="addValue();">
+       <!-- <input type="button" value="delete" onclick="deletevalue();"> -->
+    </form>
+</body>
+
+</html>

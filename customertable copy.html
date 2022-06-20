@@ -1,0 +1,471 @@
+<html>
+
+<head>
+    <title></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="customertable.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <form>
+        <!-- <table>
+                    <!- <tr>
+                        <th>id=</th>
+                        <td><input type="" id="id" placeholder="Enter id" required><br></td>
+                    </tr> ->
+            <tr>
+                <th>NAME:</th>
+                <td><input type="" id="name" placeholder="Enter name" required><br></td>
+            </tr>
+            <tr>
+                <th>EMAIL:</th>
+                <td><input type="email" id="email" placeholder="Enter email" required><br></td>
+            </tr>
+            <tr>
+                <th>PHONE:</th>
+                <td><input type="" id="phone" placeholder="Enter mobile no" required><br></td>
+            </tr>
+        </table> -->
+        <div class="row mb-3 col-md-6">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-auto">
+                <input type="" class="form-control" style="border-radius: 10px;" id="name" placeholder="Enter name">
+            </div>
+        </div>
+        <div class="row mb-3 col-md-6">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-auto">
+                <input type="" class="form-control" style="border-radius: 10px;" id="email" placeholder="123@example.com">
+            </div>
+        </div>
+        <div class="row mb-3 col-md-6">
+            <label for="Phone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-auto">
+                <input type="" class="form-control" style="border-radius: 10px;" id="phone" placeholder="Enter Mobile No">
+            </div>
+        </div>
+        <input type="button" class="btn btn-outline-success" style="border-radius: 10px;" id="add" value="add">
+        <input type="button" class="btn btn-outline-success" style="border-radius: 10px;" id="short" value="short"
+            onclick="doshort();">
+        <input type="button" class="btn btn-outline-success" style="border-radius: 10px;" value="show"
+            onclick="showValue(customer);">
+        <br /><br />
+        <b> Search:</b>
+        <select id="select" value="column" style="border-radius: 10px;">
+            <!-- <option value="id">id</option> -->
+            <option value="name">name</option>
+            <option value="email">email</option>
+            <option value="phone">phone</option>
+        </select>
+        <input type="text" id="searchtext" style="border-radius: 8px;" placeholder="Search text">
+        <input type="button" class="btn btn-outline-primary" style="border-radius: 10px;" id="search" value="search"
+            onclick="doSearch();">
+        <br />
+
+        <!-- id = <input type="" id="" placeholder="Enter value"><br> -->
+        <!-- name = <input type="" id="name" placeholder="Enter value"><br> -->
+        <!-- email=<input type="" id="email" placeholder="jdij@xyz.com"><br> -->
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+            </thead>
+            <tbody id="result">
+
+            </tbody>
+        </table>
+        <br /><br />
+    </form>
+
+    <script>    //put script in the last of the body
+        var customer = [
+            { id: "1", name: "jeel", email: "123@gmail.com", phone: "3456738" },
+            { id: "2", name: "ram", email: "234@gmail.com", phone: "87387387" },
+            { id: "3", name: "shyam", email: "345@gmail.com", phone: "37637637" }
+        ];
+
+        /*
+                function addValue() {
+                    var a = document.getElementById("box1").value;
+                    document.getElementById("box1").value = "";
+                    array.push(a);
+                    console.log(a);
+                    showValue();
+                }
+        
+        
+                deletevalue = function (val) {
+                    var temparray = [];
+                    array.map(function (value) {
+                        if (value != val) {
+                            temparray.push(value);
+                        }
+                    })
+                    array = temparray;
+                    console.log(val + " deleted successfully");
+                    showValue();
+                }
+        */
+
+
+        /*let add = document.getElementById("add");
+        add.onclick = function (e) {
+            // let nid = parseInt(document.getElementById("id").value);
+            let nid = document.getElementById("id").value;
+            let nname = document.getElementById("name").value;
+            let nemail = document.getElementById("email").value;
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            customer.push({ id: nid, name: nname, email: nemail });
+            console.log(customer);
+
+            showValue(customer);
+        }
+        */
+        function saveToStorage() {
+            localStorage.setItem("customers", JSON.stringify(customer));
+        }
+
+        function getFromStorage() {
+            var data = localStorage.getItem("customers");
+            if (data != null) {
+                customer = JSON.parse(localStorage.getItem("customers"));
+            }
+        }
+
+        function selectedid(id) {
+            selecid = id;
+            let people = getcustomerById(id);
+            //document.getElementById("id").value = people.id;
+            document.getElementById("name").value = people.name;
+            document.getElementById("email").value = people.email;
+            document.getElementById("phone").value = people.phone;
+            document.getElementById("add").value = "update";
+        }
+
+        function getcustomerById(id) {
+            for (let i = 0; i < customer.length; i++) {
+                if (customer[i].id == id) {
+                    return customer[i];
+                }
+            }
+            return {};
+        }
+
+        let add = document.getElementById("add");
+        add.onclick = function (e) {
+            // let nid = parseInt(document.getElementById("id").value);
+            var people = {};
+            // let nid = document.getElementById("id").value;
+            // let nname = document.getElementById("name").value;
+            // let nemail = document.getElementById("email").value;
+            //people.id = document.getElementById("id").value;
+            people.id = Date.now();
+            people.name = document.getElementById("name").value;
+            people.email = document.getElementById("email").value;
+            people.phone = document.getElementById("phone").value;
+            //document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("phone").value = "";
+            //customer.push(people);
+            ubtn = document.getElementById("add").value;
+            if (ubtn == "update") {
+                id = selecid;
+                var oldCustomer = getcustomerById(id);
+                //oldCustomer.id=people.id;
+                oldCustomer.name = people.name;
+                oldCustomer.email = people.email;
+                oldCustomer.phone = people.phone;
+                document.getElementById("add").value = "add";
+            }
+            else {
+                customer.push(people);
+            }
+            console.log(customer);
+
+            // localStorage.setItem("customers", JSON.stringify(customer));
+            saveToStorage();
+            showValue(customer);
+        }
+
+
+        // function addValue() {
+        //     e.preventDefault();
+        //     let nid = document.getElementById("id").value;
+        //     let nname = document.getElementById("name").value;
+        //     let nemail = document.getElementById("email").value;
+        //     customer.push({ id: nid, name: nname, email: nemail });
+        //     console.log(customer);
+        //     showValue();
+        // }
+
+
+        /*
+ 
+         var doSearch = function()
+         {
+             var column = document.getElementById("select").value;
+             var text=document.getElementById("searchtext").value;
+             console.log(column+" "+text);
+             var search_customer=[];
+             if (column=="id")
+             {
+                 var i;
+                 for(i=0;i<customer.length;i++)
+                 {
+                     if(text==customer[i].id)
+                     {
+                         console.log("true");
+                         search_customer.push(customer[i]);
+                        // break;
+                     }
+                     else
+                     {
+                         console.log("false");
+                     }
+                 }
+                
+                 // 
+                 // if(i<customer.length)
+                 // {
+                 //     showsearch(i);
+                 // }
+                 // else
+                 // {
+                 //     document.getElementById("result").innerHTML="Search not find";
+                 // }
+                 // 
+             }
+ 
+             if (column=="name")
+             {
+                 var i;
+                 for(i=0;i<customer.length;i++)
+                 {
+                     if(text==customer[i].name)
+                     {
+                         console.log("true");
+                        // break;
+                     }
+                     else
+                     {
+                         console.log("false");
+                     }
+                 }
+ 
+                 // if(i<customer.length)
+                 // {
+                 //     showsearch(i);
+                 // }
+                 // else
+                 // {
+                 //     document.getElementById("result").innerHTML="Search not find";
+                 // }
+ 
+             }
+ 
+             if (column=="email")
+             {
+                 var i;
+                 for(i=0;i<customer.length;i++)
+                 {
+                     if(text==customer[i].email)
+                     {
+                         console.log("true");
+                        // break;
+                     }
+                     else
+                     {
+                         console.log("false");
+                     }
+                 }
+ 
+                 // if(i<customer.length)
+                 // {
+                 //     showsearch(i);
+                 // }
+                 // else
+                 // {
+                 //     document.getElementById("result").innerHTML="Search not find";
+                 // }
+ 
+             }
+             showValue(search_customer);
+         }            
+         
+         */
+
+        var doSearch = function () {
+            var column = document.getElementById("select").value;
+            var text = document.getElementById("searchtext").value.toLowerCase();
+            console.log(column + " " + text);
+            var search_customer = customer.filter(function (item) {
+                if (item[column].toLowerCase().startsWith(text)) {
+                    return item;
+                }
+            });
+            showValue(search_customer);
+        }
+
+
+
+        var doshort = function () {
+            customer.sort(function (a, b)    // To sort array by adding function in sort
+            {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+            }
+            );
+
+            showValue(customer);
+        }
+
+        /*
+        function showsearch(i) {
+            let result = document.getElementById("result");
+            document.getElementById("result").innerHTML = "";
+            //for (let i = 0; i < customer.length; i++) {
+
+                const tRow = document.createElement("tr");
+                const id = document.createElement("td");
+                const name = document.createElement("td");
+                const email = document.createElement("td");
+                id.innerHTML = customer[i].id;
+                name.innerHTML = customer[i].name;
+                email.innerHTML = customer[i].email;
+                const deleteinfo= document.createElement("td");
+                const deletebtn=document.createElement("button");
+                deletebtn.innerHTML="Delete";
+                deletebtn.onclick=function(e)
+                {
+                    e.preventDefault();
+                    deleteValue(customer[i].id);
+                }
+                // document.createTextNode(word + " ");
+                // const div = document.createElement("div");
+                // const deletebtn = document.createElement("button");
+                // deletebtn.innerHTML = "delete";
+                // deletebtn.onclick = function (e) {
+                //     e.preventDefault();
+                //     console.log("delete:" + word);
+                //     deletevalue(word);
+                // }
+                // div.appendChild(text);
+                // div.appendChild(deletebtn);
+                // result.appendChild(div);
+                deleteinfo.appendChild(deletebtn);
+                tRow.appendChild(id);
+                tRow.appendChild(name);
+                tRow.appendChild(email);
+                tRow.appendChild(deleteinfo);
+                result.appendChild(tRow);
+           //}
+        }
+
+        */
+
+        function deleteValue(id) {
+            temparray = [];
+            for (i = 0; i < customer.length; i++) {
+                if (id != customer[i].id) {
+                    temparray.push(customer[i]);
+                }
+            }
+            customer = temparray;
+            saveToStorage();
+            showValue(customer);
+        }
+
+        function showValue(customer) {
+            let result = document.getElementById("result");
+            document.getElementById("result").innerHTML = "";
+            for (let i = 0; i < customer.length; i++) {
+
+                const tRow = document.createElement("tr");
+                const id = document.createElement("td");
+                const name = document.createElement("td");
+                const email = document.createElement("td");
+                const phone = document.createElement("td");
+                id.innerHTML = customer[i].id;
+                name.innerHTML = customer[i].name;
+                email.innerHTML = customer[i].email;
+                phone.innerHTML = customer[i].phone;
+                const deleteinfo = document.createElement("td");
+                const deletebtn = document.createElement("button");
+                // deletebtn.style.backgroundColor = "red";
+                deletebtn.className = "btn btn-outline-danger";
+                deletebtn.innerHTML = "Delete";
+                deletebtn.style = "border-radius: 10px;"
+                deletebtn.onclick = function (e) {
+                    e.preventDefault();
+                    deleteValue(customer[i].id);
+                }
+
+                const editinfo = document.createElement("td");
+                const editbtn = document.createElement("button");
+                editbtn.innerHTML = "edit";
+                editbtn.style = "border-radius: 10px;"
+                editbtn.className = "btn btn-outline-secondary";
+                editbtn.onclick = function (e) {
+                    e.preventDefault();
+                    console.log("edit button clicked");
+                    selectedid(customer[i].id);
+                }
+
+                editinfo.appendChild(editbtn);
+
+
+                /*
+                document.createTextNode(word + " ");
+                const div = document.createElement("div");
+                const deletebtn = document.createElement("button");
+                 deletebtn.innerHTML = "delete";
+                 deletebtn.onclick = function (e) {
+                     e.preventDefault();
+                     console.log("delete:" + word);
+                     deletevalue(word);
+                 }
+                 div.appendChild(text);
+                 div.appendChild(deletebtn);
+                 result.appendChild(div);
+                */
+
+                deleteinfo.appendChild(deletebtn);
+                tRow.appendChild(id);
+                tRow.appendChild(name);
+                tRow.appendChild(email);
+                tRow.appendChild(phone);
+                tRow.appendChild(deleteinfo);
+                tRow.appendChild(editinfo);
+                result.appendChild(tRow);
+            }
+        }
+        getFromStorage();
+        //showValue();
+    </script>
+
+</body>
+
+</html>

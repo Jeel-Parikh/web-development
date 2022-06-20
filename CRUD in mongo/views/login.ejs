@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./head") %>
+    <title>Login</title>
+</head>
+<body>
+    <%- include("./navbar") %> 
+    <form action="/detail" method="post">
+        <label for="email">Email: </label>
+        <input type="email" name="email" required id="email"><br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" required id="password"><br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>

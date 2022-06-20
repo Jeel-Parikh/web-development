@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css2</title>
+    <style>
+        * {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            height: auto;
+            width: auto;
+            border-radius: 30px 5px 30px 5px;
+        }
+
+        .navbar {
+            background-color: #dad9c9;
+            opacity: 0.9;
+            position: sticky;
+            font-size: 18px;
+            border-radius: 15px 5px 15px 5px;
+            top: 1px;
+        }
+
+        .navbar ul {
+            padding-inline-start: 10px;
+            padding-inline-end: 7px;
+        }
+
+        .navbar ul li {
+            list-style-type: none;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        .search {
+            float: right;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+
+        .navbar input {
+            border-radius: 7px;
+            padding: 4px;
+        }
+
+        a:hover {
+            font-size: 20px;
+            background-color: rgb(110, 96, 96);
+            border-radius: 15px 5px 15px 5px;
+            color: white;
+        }
+
+        a:visited {
+            background-color: rgb(116, 91, 91);
+            color: rgb(42, 29, 63);
+        }
+
+
+        .main {
+            background-color: #d59dde;
+            border: 2px solid black;
+            overflow: auto;
+            margin: 20px;
+        }
+
+        .box {
+            background-color: aquamarine;
+            margin: 2px;
+            /*margin: auto;           This will give margine same from all side according to height and width*/
+            border: 2px solid black;
+            padding: 10px;
+            height: 250px;
+            width: 300px;
+            box-sizing: border-box;
+            /*this is used to set padding and margin within given height and width in normal they will change height and width accordingly*/
+        }
+
+        #box1 {
+            float: left;
+            /*This is use to float element in lest in given navbar*/
+        }
+
+        #box2 {
+            float: right;
+        }
+
+        #box3 {
+            /*visibility will hide the content but not remove the contant*/
+            visibility: hidden;
+            /*display:none;    this will remove element*/
+            clear: both;
+            /*This is use to prevent over-right (over-lapping) which was accure by float left right or both*/
+        }
+
+        .main2 {
+            background-color: lightgrey;
+        }
+
+        #box4 {
+            position: relative;
+            /* This will change position according to it actual position*/
+            display: inline-block;
+            left: 100px;
+            z-index: 3;
+        }
+
+        #box5 {
+            position: absolute;
+            /* This will change position according to it parent mean absolute position*/
+            display: inline-block;
+            right: 10px;
+        }
+
+        #box6 {
+            position: fixed;
+            /*higher z index will on the top of stack lower will at the end of the stack*/
+            z-index: 2;
+            left: 350px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <nav class="navi">
+            <ul>
+                <li><a href="google.com">home</a></li>
+                <li><a href="#">sports</a></li>
+                <li><a href="#">news</a></li>
+                <li><a href="#">contacts us</a></li>
+                <div class="search">
+                    <input id="search" type="text" placeholder="search">
+                </div>
+            </ul>
+        </nav>
+    </div>
+    <div class="main">
+
+        <div class="box" id="box1">
+            <h3 class="heading">hello jeel</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+        <div class="box" id="box2">
+            <h3 class="heading">hello jeel</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+        <div class="box" id="box3">
+            <h3 class="heading">hello jeel</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+    </div>
+    <div class="main2">
+
+        <div class="box" id="box4">
+            <h3 class="heading">hello jeel 1</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+        <div class="box" id="box5">
+            <h3 class="heading">hello jeel 2</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+        <div class="box" id="box6">
+            <h3 class="heading">hello jeel 3</h3>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis tempore id quos harum
+                est
+                repellendus ipsum. Delectus quas ipsum inventore voluptas eius ducimus, doloremque libero accusamus
+                ratione
+                quaerat dolor nisi.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./head") %> 
+    <title>All people</title>
+</head>
+<body>
+    <%- include("./navbar") %> 
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let people of peoples){ %> 
+            <tr>
+                <td><%= people.firstname %> </td>
+                <td><%= people.lastname %> </td>
+                <td><%= people.email %> </td>
+                <td><%= people.gender %> </td>
+            </tr>
+            <% } %> 
+        </tbody>
+
+    </table>
+</body>
+</html>

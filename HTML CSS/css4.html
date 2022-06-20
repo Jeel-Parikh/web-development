@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation bar</title>
+    <style>
+        header::before {
+            background: url("https://source.unsplash.com/random/1600x900") no-repeat center center/cover;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            opacity: 0.5;
+
+        }
+
+        body {
+            /* border-image-repeat: none; */
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                background-color: black;
+            }
+
+            header::before {
+                background: url("https://source.unsplash.com/random/600x900") no-repeat center center/cover;
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: -1;
+                opacity: 0.5;
+            }
+
+            .main {
+                flex-wrap: wrap;
+            }
+        }
+
+        .container {
+            z-index: 3;
+            box-shadow: 3px 5px 15px black;
+        }
+
+        .container ul {
+            display: flex;
+            /* color:white; */
+
+        }
+
+        .container a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container li {
+            list-style: none;
+            padding: 10px 20px;
+            padding-inline-start: 0px;
+        }
+
+        .main {
+            display: flex;
+        }
+
+        .box {
+            box-shadow: 15px 15px 20px black;
+            /* border: 2px solid black; */
+            padding: 20px;
+            animation-name: jeel;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes jeel {
+            0% {
+                box-shadow: 15px 15px 20px black;
+            }
+
+            25% {
+                box-shadow: 15px 15px 20px red;
+            }
+
+            50% {
+                box-shadow: 15px 15px 20px green;
+            }
+
+            75% {
+                box-shadow: 15px 15px 20px blue;
+            }
+
+            100% {
+                box-shadow: 15px 15px 20px black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <ul>
+                    <li class="list"><a href="">Home</a></li>
+                    <li class="list"><a href="">Shop</a> </li>
+                    <li class="list"><a href="">Cart</a> </li>
+                    <li class="list"><a href="">Contact us</a> </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="main">
+        <div class="box">
+            <h2>hello jeel</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur recusandae amet optio omnis
+                laudantium architecto quisquam in laborum repellendus pariatur!</p>
+        </div>
+        <div class="box" id="image">
+            <img src="https://source.unsplash.com/400x400/?coding" alt="">
+        </div>
+        <div class="box">
+            <h2>hello jeel third box</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur recusandae amet optio omnis
+                laudantium architecto quisquam in laborum repellendus pariatur!</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    
+        <h1>Table of number</h1>
+ 
+</head>
+
+<body>
+   
+        <form>
+            <input type="" id="box" placeholder="Enter number">
+            <input type="button" id="hii" value="Answer" onclick="table()"><br><br>
+            <!--<label id="result"></label>-->
+            <div id="result"></div>
+        </form>
+   
+    <script>
+        table = function () {
+            var a = parseInt(document.getElementById("box").value);
+            var i;
+            document.getElementById("box").value = "";
+            var array = [];
+            for (i = 1; i <= 10; i++) {
+                //document.write("<br/>" + a + "x" + i + "=" + a * i);
+                console.log("<br/>" + a + "x" + i + "=" + a * i);
+                array.push(a + "x" + i + "=" + a * i);
+            }
+            // console.log(JSON.stringify(array));
+            // document.getElementById("result").innerHTML = JSON.stringify(array);
+            let result = document.getElementById("result");
+            document.getElementById("result").innerHTML = "";
+            for (let i = 0; i < array.length; i++) {
+                const text = document.createTextNode(array[i]);
+                let div = document.createElement("div");
+                div.appendChild(text);
+                result.appendChild(div);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

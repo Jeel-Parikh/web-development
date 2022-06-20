@@ -1,0 +1,29 @@
+<!-- Refer "passing data to templets.js" -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("templets/head") %>
+</head>
+
+<body>
+    <%- include("templets/navbar") %>
+    <h1>List of cats:</h1>
+    <ul>
+        <% for(i of cat){ %>
+
+        <li><%= i %> </li>
+        
+        <% } %>
+    </ul>
+
+
+    <!-- <script>
+        for(i of cat){
+            <li>i</li>
+        }
+    </script> -->
+</body>
+
+</html>

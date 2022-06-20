@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("templets/head") %>
+</head>
+
+<body>
+    <%- include("templets/navbar") %> 
+    <h1>Your random number <%= rand %> </h1>
+
+    <!-- Doing this type of stuff in ".ejs" file is not good it will look messy so we have to do this things in js file -->
+
+    <%  if(rand%2==0){ %>
+    <h2>Random number is even</h2>
+    <% }else{ %>
+    <h2>Random number is odd</h2>
+    <%  } %>
+
+
+    <!-- We can also use ternery operator like this -->
+
+    <h3><%= rand%2==0 ? "even": "odd" %> </h3>
+
+    <h1>This ans comes from js file number <%= rand %>  <%= ans %> </h1>
+
+    <!-- In EJS writing first JS and then cover it with tags is easy -->
+
+    <!-- <script>
+        if(rand==0){
+            <h2>Random number is even</h2>
+        }else{
+            <h2>Random number is odd</h2>
+        }
+        rand%2==0 ? "even": "odd"
+    </script> -->
+
+</body>
+
+</html>

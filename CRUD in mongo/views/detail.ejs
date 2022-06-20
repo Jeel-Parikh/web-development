@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./head") %>
+    <title>Detail</title>
+</head>
+<body>
+    <%- include("./navbar") %> 
+    <h3>Welcome <%= f.firstname %> </h3>
+    <ul>
+        <li>First name:<%= f.firstname %> </li>
+        <li>Last name: <%= f.lastname %> </li>
+        <li>Email: <%= f.email %> </li>
+        <li>Gender: <%= f.gender %> </li>
+    </ul>
+    <a href="/update/<%= f._id %>">update</a><br>
+    <a href="/remove/<%= f._id %>">remove</a>
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= f.firstname %> </td>
+                <td><%= f.lastname %> </td>
+                <td><%= f.email %> </td>
+                <td><%= f.gender %> </td>
+                <td><a href="/edit/<%= f._id %> ">Edit</a></td>
+                <td><a href="/remove/<%= f._id %> ">Remove</a></td>
+            </tr>
+        </tbody>
+    </table> -->
+</body>
+</html>
