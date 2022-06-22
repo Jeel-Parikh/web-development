@@ -5,7 +5,7 @@ const fs = require('fs');
 const regex1 = new re2(/((https?:)|(www)|(\/\/))[^("|'|\s)]+/g)
 var cnt = 0
 
-fs.readFile('./test.html', 'utf8', (err, data) => {
+fs.readFile('./regex_view/test.html', 'utf8', (err, data) => {
     if (err) {
         console.error(err);
         return;
